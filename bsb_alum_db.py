@@ -16,7 +16,7 @@ grad_year_options = ["ALL"] + sorted_grad_years
 selected_year = st.selectbox('Select Graduation Year',grad_year_options)
 # available_for_mentoring = st.checkbox('Mentoring Availability')
 # zoom_availability = st.checkbox("Open to Zoom Call")
-st.subheader("Alumni List")
+#st.header("Alumni List")
 
 if selected_year == "ALL":
     filtered_alum = df
@@ -24,9 +24,10 @@ else:
     filtered_alum = df[df["Graduation Year"] == selected_year]
 
 for index, alum in filtered_alum.iterrows():
+    # alum_name = alum["First Name"] + "'s" + " Current Position: "
     
-    st.write(f"{alum['Last Name']}, {alum['First Name']} - {alum['Graduation Year']} - {alum['Concentration']} - {alum['Current Job Role']}")
-        
+    st.subheader(f"{alum['Last Name']}, {alum['First Name']} - {alum['Graduation Year']} - {alum['Concentration']}")
+    st.write(f"{alum['Current Job Role']} - {alum['Current Work']}")
         # Show more details on click
 
     if st.button(f"View Details for {alum['First Name']} {alum['Last Name']}"):
