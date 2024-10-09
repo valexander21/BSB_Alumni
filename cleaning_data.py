@@ -1,13 +1,6 @@
 import pandas as pd
 
-df = pd.read_csv("bsb_alum.csv")
-
-
-
-
-
-
-
+df = pd.read_csv("bsb_alum_data.csv")
 
 def drop_columns(df: pd.DataFrame ,column_name : str):
     df = df.drop([column_name], axis=1)
