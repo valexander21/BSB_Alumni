@@ -1,6 +1,7 @@
 import streamlit as st
 import pandas as pd
 import gspread 
+import json
 import os
 from google.oauth2.service_account import Credentials
 
@@ -22,14 +23,12 @@ from google.oauth2.service_account import Credentials
         # git commit -m "message"
         # git origin push main 
 
+google_credentials = json.loads(st.secrets["credentials"]["google_application_credentials"])
 
-creds_path = os.getenv("GOOGLE_APPLICATION_CREDENTIALS")
-if creds_path:
-    scope = ["https://spreadsheets.google.com/feeds", "https://www.googleapis.com/auth/drive"]
-    creds = Credentials.from_service_account_file("softball-alumni-a0a84a5b98fc.json", scopes=scope)
-    client = gspread.authorize(creds)
-else:
-    raise ValueError("Google credentials not found. Please set the environment variable GOOGLE_APPLICATION_CREDENTIALS.")
+
+scope = ["https://spreadsheets.google.com/feeds", "https://www.googleapis.com/auth/drive"]
+creds = Credentials.from_service_account_info(google_credentials, scopes=scope)
+client = gspread.authorize(creds)
 
 sheet = client.open("Brown Softball Alumni Portal").sheet1
 

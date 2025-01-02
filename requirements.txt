@@ -1,4 +1,8 @@
 streamlit
 pandas
+gspread 
+json
+os
+google.oauth2.service_account 
 
 
